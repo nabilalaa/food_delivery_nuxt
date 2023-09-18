@@ -1,16 +1,22 @@
 <template>
 	<Modal
-		v-if="getmeal !== null"
+		v-show="showmeal"
 		TargetName="info-meals"
 		Title="معلومات الوجبة"
 		bg="mainColor"
-		width="2xl"
+		width="max-w-2xl"
 	>
-		<h3 class="font-bold text-2xl mt-10">{{ getmeal.name }}</h3>
-		<img class="m-auto my-6" :src="getmeal.image" alt="" />
+		<h3 class="font-bold text-2xl mt-10">
+			{{ getmeal ? getmeal.name : "" }}
+		</h3>
+		<img
+			class="m-auto my-6"
+			:src="getmeal ? getmeal.image : ''"
+			alt=""
+		/>
 		<div class="flex justify-around">
-			<div>{{ getmeal.desc }}</div>
-			<div>{{ getmeal.price }}</div>
+			<div>{{ getmeal ? getmeal.desc : "" }}</div>
+			<div>{{ getmeal ? getmeal.price : "" }}</div>
 		</div>
 	</Modal>
 
@@ -23,13 +29,16 @@
 					class="icon-search absolute block mr-4 z-50"
 				></span>
 
-				<form class="w-full" @submit.prevent="">
+				<form
+					class="w-full items-center flex"
+					@submit.prevent=""
+				>
 					<label
 						for="default-search"
 						class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
 						>Search</label
 					>
-					<div class="relative">
+					<div class="relative w-full">
 						<div
 							class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
 						>
@@ -56,13 +65,13 @@
 							id="default-search"
 							class="block w-full p-4 pl-10 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-mainColor focus:border-mainColor dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-mainColor dark:focus:border-mainColor"
 						/>
-						<button
-							type="button"
-							class="text-white absolute left-16 bottom-2 bg-mainColor hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2 dark:bg-blue-600 dark:hover:bg-mainColor dark:focus:ring-blue-800"
-						>
-							بحث
-						</button>
 					</div>
+					<button
+						type="button"
+						class="text-white mr-4 bg-mainColor hover:bg-orange-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2 dark:bg-blue-600 dark:hover:bg-mainColor dark:focus:ring-blue-800"
+					>
+						بحث
+					</button>
 				</form>
 			</div>
 			<div
@@ -125,7 +134,11 @@
 					>
 						<div class="info flex">
 							<div class="ml-4">
-								{{ meal.name }}
+								{{
+									meal.name
+										? meal.name
+										: "not find"
+								}}
 							</div>
 							<div>{{ meal.price }} ج.م</div>
 						</div>
@@ -176,6 +189,7 @@ const meals = ref(null);
 const getmeal = ref(null);
 const searchtext = ref(null);
 const searchResult = ref(null);
+const showmeal = ref(false);
 
 onMounted(async () => {
 	await $fetch("/api/meals").then((response) => {
@@ -184,7 +198,7 @@ onMounted(async () => {
 });
 
 async function getMeal(id) {
-	console.log(id);
+	showmeal.value = true;
 	await $fetch(`/api/meals/${id}`).then((response) => {
 		getmeal.value = response;
 		console.log(response);
@@ -192,15 +206,15 @@ async function getMeal(id) {
 }
 
 async function search() {
-	await useFetch(`/api/meals/search`, {
+	await $fetch(`/api/meals/search`, {
 		method: "post",
 		body: {
 			search: searchtext.value
 		}
 	}).then((response) => {
-		searchResult.value = response.data.value;
+		searchResult.value = response;
 
-		console.log(response.data.value);
+		// console.log(response.data.value);
 	});
 }
 // import axios from "axios";

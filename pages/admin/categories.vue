@@ -3,7 +3,7 @@
 		TargetName="add-category"
 		Title="اضافة تصنيف"
 		bg="white"
-		width="5xl"
+		width="max-w-5xl"
 	>
 		<div
 			v-if="Alert !== null"
@@ -79,7 +79,7 @@
 		TargetName="update-category"
 		Title="تعديل تصنيف"
 		bg="white"
-		width="5xl"
+		width="max-w-5xl"
 	>
 		<div
 			v-if="Alert !== null"
@@ -268,12 +268,8 @@ const loading = ref(false);
 // const image = ref(e.target[1].files[0]);
 // Methods
 function get_categories() {
-	useFetch("/api/category").then((response) => {
-		if (!response.pending.value) {
-			categories.value = response.data.value;
-		} else {
-			loading.value = response.pending.value;
-		}
+	$fetch("/api/category").then((response) => {
+		categories.value = response;
 	});
 }
 async function get_category(id) {

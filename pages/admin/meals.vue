@@ -4,7 +4,7 @@
 		TargetName="update-meals"
 		Title="تعديل الوجبات"
 		bg="white"
-		width="5xl"
+		width="max-w-5xl"
 	>
 		<div
 			v-if="Alert !== null"
@@ -137,7 +137,7 @@
 		TargetName="add-meals"
 		Title="اضافة الوجبات"
 		bg="white"
-		width="5xl"
+		width="max-w-5xl"
 	>
 		<div
 			v-if="Alert !== null"
