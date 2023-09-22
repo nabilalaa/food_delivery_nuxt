@@ -5,8 +5,9 @@
 		bg="white"
 		width="max-w-5xl"
 	>
+		{{ alertColor }}
 		<div
-			v-if="Alert !== null"
+			v-show="AlertShow"
 			:class="`flex items-center p-4 mb-4 text-sm text-${alertColor}-800 rounded-lg bg-${alertColor}-50 dark:bg-gray-800 dark:text-${alertColor}-400`"
 			role="alert"
 		>
@@ -65,6 +66,7 @@
 						:src="image"
 						alt="My Awesome Image"
 					/>
+					{{ image }}
 				</div>
 			</div>
 			<button
@@ -248,7 +250,7 @@ definePageMeta({
 });
 
 // Form Data
-const name = ref("dd");
+const name = ref("");
 const nameupdate = ref(null);
 
 const image = ref(null);
@@ -260,8 +262,8 @@ const searchResult = ref(null);
 
 const iid = ref(null);
 const Alert = ref(null);
-const alertColor = ref(null);
-// const AlertShow = ref(false);
+const alertColor = ref("");
+const AlertShow = ref(false);
 const categories = ref([]);
 const loading = ref(false);
 
@@ -285,6 +287,7 @@ async function get_category(id) {
 }
 
 async function create_category(e) {
+	console.log(e.target[1].files[0]);
 	alertColor.value = "blue";
 
 	Alert.value = "انتظر ثواني";
@@ -292,36 +295,45 @@ async function create_category(e) {
 	formdataimage.append("file", e.target[1].files[0]);
 	formdataimage.append("upload_preset", "delivery");
 
-	await useFetch(
-		"https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload",
-		{
+	if (e.target[1].files[0] !== undefined) {
+		await useFetch(
+			"https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload",
+			{
+				method: "post",
+				body: formdataimage
+			}
+		).then((response) => {
+			image.value = response.data.value;
+		});
+	} else {
+		image.value = "https://placehold.co/600x400";
+	}
+
+	if (name || image) {
+		await useFetch("/api/category", {
 			method: "post",
-			body: formdataimage
-		}
-	).then((response) => {
-		console.log(response.data.value);
+			body: {
+				name: name.value,
+				image: image.value
+			}
+		}).then((response) => {
+			if (response.status.value == "success") {
+				Alert.value = "تم الاضافة";
 
-		image.value = response.data.value.secure_url;
-	});
+				alertColor.value = "green";
+				AlertShow.value = true;
 
-	await useFetch("/api/category", {
-		method: "post",
-		body: {
-			name: name.value,
-			image: image.value
-		}
-	}).then((response) => {
-		if (response.status.value == "success") {
-			alertColor.value = "green";
-			Alert.value = "تم الاضافة";
-			setTimeout(() => {
-				reloadNuxtApp();
-			}, 3000);
-		} else {
-			alertColor.value = "red";
-			Alert.value = "لم يتم الاضافة";
-		}
-	});
+				// setTimeout(() => {
+				// 	reloadNuxtApp();
+				// }, 3000);
+			} else {
+				alertColor.value = "red";
+				Alert.value = "لم يتم الاضافة";
+
+				AlertShow.value = true;
+			}
+		});
+	}
 }
 
 async function update_category(e) {

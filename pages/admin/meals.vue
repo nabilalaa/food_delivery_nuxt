@@ -415,15 +415,19 @@ async function create_meal(e) {
 	formdataimage.append("file", e.target[1].files[0]);
 	formdataimage.append("upload_preset", "delivery");
 
-	await useFetch(
-		"https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload",
-		{
-			method: "post",
-			body: formdataimage
-		}
-	).then((response) => {
-		image.value = response.data.value.secure_url;
-	});
+	if (e.target[1].files[0] !== undefined) {
+		await useFetch(
+			"https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload",
+			{
+				method: "post",
+				body: formdataimage
+			}
+		).then((response) => {
+			image.value = response.data.value.secure_url;
+		});
+	} else {
+		image.value = "https://placehold.co/600x400";
+	}
 
 	await useFetch("/api/meals", {
 		method: "post",

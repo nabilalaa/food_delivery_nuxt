@@ -50,8 +50,6 @@ import { initModals } from "flowbite";
 
 // options with default values
 
-import { Modal } from "flowbite";
-
 /*
  * $targetEl: required
  * options: optional
