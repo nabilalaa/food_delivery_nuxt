@@ -323,9 +323,9 @@ async function create_category(e) {
 				alertColor.value = "green";
 				AlertShow.value = true;
 
-				// setTimeout(() => {
-				// 	reloadNuxtApp();
-				// }, 3000);
+				setTimeout(() => {
+					reloadNuxtApp();
+				}, 3000);
 			} else {
 				alertColor.value = "red";
 				Alert.value = "لم يتم الاضافة";
