@@ -76,16 +76,11 @@
 			</button>
 		</form>
 	</Modal>
-	<Modal
-		v-if="categories !== []"
-		TargetName="update-category"
-		Title="تعديل تصنيف"
-		bg="white"
-		width="max-w-5xl"
-	>
+	<Modal TargetName="update" Title="تعديل تصنيف" bg="white" width="max-w-5xl">
 		<div
 			v-if="Alert !== null"
-			:class="`flex items-center p-4 mb-4 text-sm text-${alertColor}-800 rounded-lg bg-${alertColor}-50 dark:bg-gray-800 dark:text-${alertColor}-400`"
+			class="flex items-center p-4 mb-4 text-sm rounded-lg bg-${alertColor}-50"
+			:class="{ [`text-red-800`]: alertColor }"
 			role="alert"
 		>
 			<svg
@@ -138,11 +133,7 @@
 					<!-- {{ imageupdate }} -->
 					<img
 						class="rounded-full w-24 h-24 object-cover mt-4"
-						:src="
-							imageupdate
-								? imageupdate
-								: 'https://placehold.co/600x400'
-						"
+						:src="imageupdate ? imageupdate : 'https://placehold.co/600x400'"
 						alt="My Awesome Image"
 					/>
 				</div>
@@ -156,14 +147,9 @@
 	</Modal>
 
 	<div>
-		<h1 class="text-center text-4xl p-5 mb-5 font-bold">
-			ادارة التصنيفات
-		</h1>
+		<h1 class="text-center text-4xl p-5 mb-5 font-bold">ادارة التصنيفات</h1>
 		<div class="flex justify-between items-center flex-wrap mb-5">
-			<form
-				class="sm:w-[60%] w-full sm:m-0 mb-4"
-				@submit.prevent=""
-			>
+			<form class="sm:w-[60%] w-full sm:m-0 mb-4" @submit.prevent="">
 				<label
 					for="default-search"
 					class="mb-2 text-lg font-medium text-gray-900 sr-only dark:text-white"
@@ -207,9 +193,9 @@
 				</div>
 			</form>
 			<button
+				id="add-category"
+				@click="openModel"
 				type="button"
-				data-modal-target="add-category"
-				data-modal-toggle="add-category"
 				class="text-white bg-blue-700 flex items-center hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 			>
 				اضافة تصنيفات
@@ -246,8 +232,12 @@
 
 <script setup>
 definePageMeta({
-	layout: "dashboard"
+	layout: "dashboard",
 });
+
+function openModel(e) {
+	document.querySelector("#add-category").showModal();
+}
 
 // Form Data
 const name = ref("");
@@ -261,9 +251,9 @@ const searchResult = ref(null);
 // Data
 
 const iid = ref(null);
-const Alert = ref(null);
-const alertColor = ref("");
-const AlertShow = ref(false);
+let Alert = ref(null);
+let alertColor = ref("red");
+let AlertShow = ref(false);
 const categories = ref([]);
 const loading = ref(false);
 
@@ -300,7 +290,7 @@ async function create_category(e) {
 			"https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload",
 			{
 				method: "post",
-				body: formdataimage
+				body: formdataimage,
 			}
 		).then((response) => {
 			image.value = response.data.value;
@@ -314,8 +304,8 @@ async function create_category(e) {
 			method: "post",
 			body: {
 				name: name.value,
-				image: image.value
-			}
+				image: image.value,
+			},
 		}).then((response) => {
 			if (response.status.value == "success") {
 				Alert.value = "تم الاضافة";
@@ -323,9 +313,9 @@ async function create_category(e) {
 				alertColor.value = "green";
 				AlertShow.value = true;
 
-				setTimeout(() => {
-					reloadNuxtApp();
-				}, 3000);
+				// setTimeout(() => {
+				// 	reloadNuxtApp();
+				// }, 3000);
 			} else {
 				alertColor.value = "red";
 				Alert.value = "لم يتم الاضافة";
@@ -343,13 +333,10 @@ async function update_category(e) {
 	const formdataimage = new FormData();
 	formdataimage.append("file", e.target[1].files[0]);
 	formdataimage.append("upload_preset", "delivery");
-	await useFetch(
-		"https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload",
-		{
-			method: "post",
-			body: formdataimage
-		}
-	).then((response) => {
+	await useFetch("https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload", {
+		method: "post",
+		body: formdataimage,
+	}).then((response) => {
 		console.log(response.status.value !== "error");
 		if (response.status.value !== "error") {
 			imageupdate.value = response.data.value.secure_url;
@@ -361,8 +348,8 @@ async function update_category(e) {
 			method: "put",
 			body: {
 				name: nameupdate.value,
-				image: imageupdate.value
-			}
+				image: imageupdate.value,
+			},
 		}).then((response) => {
 			if (response.status.value == "success") {
 				Alert.value = "تم التعديل";
@@ -380,7 +367,7 @@ async function update_category(e) {
 }
 function delete_category(id) {
 	useFetch(`/api/category/${id}`, {
-		method: "delete"
+		method: "delete",
 	}).then((response) => {
 		get_categories();
 	});
@@ -390,8 +377,8 @@ async function search() {
 	await useFetch(`/api/category/search`, {
 		method: "post",
 		body: {
-			search: searchtext.value
-		}
+			search: searchtext.value,
+		},
 	}).then((response) => {
 		searchResult.value = response.data.value;
 

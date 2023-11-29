@@ -1,139 +1,5 @@
 <template>
 	<Modal
-		v-if="meals !== []"
-		TargetName="update-meals"
-		Title="تعديل الوجبات"
-		bg="white"
-		width="max-w-5xl"
-	>
-		<div
-			v-if="Alert !== null"
-			:class="`flex items-center p-4 mb-4 text-sm text-${alertColor}-800 rounded-lg bg-${alertColor}-50 dark:bg-gray-800 dark:text-${alertColor}-400`"
-			role="alert"
-		>
-			<svg
-				class="flex-shrink-0 inline w-4 h-4 mr-3"
-				aria-hidden="true"
-				xmlns="http://www.w3.org/2000/svg"
-				fill="currentColor"
-				viewBox="0 0 20 20"
-			>
-				<path
-					d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
-				/>
-			</svg>
-			<span class="sr-only">Info</span>
-			<div class="mr-4">
-				{{ Alert }}
-			</div>
-		</div>
-		<form action="#" @submit.prevent="update_meal">
-			<div class="grid text-2xl gap-4 mb-4 sm:grid-cols-2">
-				<div>
-					<label
-						for="name"
-						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
-						>الاسم</label
-					>
-					<input
-						v-model="nameupdate"
-						type="text"
-						name="name"
-						id="name"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-						placeholder="الاسم"
-						required=""
-					/>
-				</div>
-				<div>
-					<label
-						for="file_input"
-						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
-						>صورة الوجبة</label
-					>
-					<input
-						type="file"
-						name="file_input"
-						id="file_input"
-						class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-						placeholder="صورة الوجبة"
-					/>
-					<img
-						class="rounded-full w-24 h-24 object-cover mt-4"
-						:src="
-							imageupdate
-								? imageupdate
-								: 'https://placehold.co/600x400'
-						"
-						alt="My Awesome Image"
-					/>
-				</div>
-				<div>
-					<label
-						for="price"
-						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
-						>السعر</label
-					>
-					<input
-						v-model="priceupdate"
-						type="number"
-						name="price"
-						id="price"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-						placeholder="السعر"
-						required=""
-					/>
-				</div>
-				<div>
-					<label
-						for="category"
-						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
-						>التصنيف</label
-					>
-					<select
-						id="category"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring -primary-500 dark:focus:border-primary-500"
-					>
-						<!-- <option disabled selected="">
-							{{ categoryupdate }}
-						</option> -->
-						<option
-							selected
-							v-for="category in selectcategory"
-							:key="category"
-							:value="category.name"
-						>
-							{{
-								categoryupdate !== category.name
-									? category.name
-									: categoryupdate
-							}}
-						</option>
-					</select>
-				</div>
-				<div class="sm:col-span-2">
-					<label
-						for="description"
-						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
-						>الوصف</label
-					>
-					<textarea
-						v-model="descupdate"
-						id="description"
-						rows="4"
-						class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-						placeholder="الوصف"
-					></textarea>
-				</div>
-			</div>
-			<button
-				class="text-white bg-blue-700 m-auto flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-			>
-				<p>اضافة تصنيف</p>
-			</button>
-		</form>
-	</Modal>
-	<Modal
 		TargetName="add-meals"
 		Title="اضافة الوجبات"
 		bg="white"
@@ -260,15 +126,141 @@
 			</button>
 		</form>
 	</Modal>
-	<div>
-		<h1 class="text-center text-4xl p-5 mb-5 font-bold">
-			ادارة الوجبات
-		</h1>
-		<div class="flex justify-between items-center flex-wrap mb-5">
-			<form
-				class="sm:w-[60%] w-full sm:m-0 mb-4"
-				@submit.prevent=""
+	<Modal
+		v-if="meals"
+		TargetName="update"
+		Title="تعديل الوجبات"
+		bg="white"
+		width="max-w-5xl"
+	>
+		<div
+			v-if="Alert !== null"
+			:class="`flex items-center p-4 mb-4 text-sm text-${alertColor}-800 rounded-lg bg-${alertColor}-50 dark:bg-gray-800 dark:text-${alertColor}-400`"
+			role="alert"
+		>
+			<svg
+				class="flex-shrink-0 inline w-4 h-4 mr-3"
+				aria-hidden="true"
+				xmlns="http://www.w3.org/2000/svg"
+				fill="currentColor"
+				viewBox="0 0 20 20"
 			>
+				<path
+					d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"
+				/>
+			</svg>
+			<span class="sr-only">Info</span>
+			<div class="mr-4">
+				{{ Alert }}
+			</div>
+		</div>
+		<form action="#" @submit.prevent="update_meal">
+			<div class="grid text-2xl gap-4 mb-4 sm:grid-cols-2">
+				<div>
+					<label
+						for="name"
+						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+						>الاسم</label
+					>
+					<input
+						v-model="nameupdate"
+						type="text"
+						name="name"
+						id="name"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+						placeholder="الاسم"
+						required=""
+					/>
+				</div>
+				<div>
+					<label
+						for="file_input"
+						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+						>صورة الوجبة</label
+					>
+					<input
+						type="file"
+						name="file_input"
+						id="file_input"
+						class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+						placeholder="صورة الوجبة"
+					/>
+					<img
+						class="rounded-full w-24 h-24 object-cover mt-4"
+						:src="imageupdate ? imageupdate : 'https://placehold.co/600x400'"
+						alt="My Awesome Image"
+					/>
+				</div>
+				<div>
+					<label
+						for="price"
+						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+						>السعر</label
+					>
+					<input
+						v-model="priceupdate"
+						type="number"
+						name="price"
+						id="price"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+						placeholder="السعر"
+						required=""
+					/>
+				</div>
+				<div>
+					<label
+						for="category"
+						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+						>التصنيف</label
+					>
+					<select
+						id="category"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring -primary-500 dark:focus:border-primary-500"
+					>
+						<!-- <option disabled selected="">
+							{{ categoryupdate }}
+						</option> -->
+						<option
+							selected
+							v-for="category in selectcategory"
+							:key="category"
+							:value="category.name"
+						>
+							{{
+								categoryupdate !== category.name
+									? category.name
+									: categoryupdate
+							}}
+						</option>
+					</select>
+				</div>
+				<div class="sm:col-span-2">
+					<label
+						for="description"
+						class="block mb-2 text-lg font-medium text-gray-900 dark:text-white"
+						>الوصف</label
+					>
+					<textarea
+						v-model="descupdate"
+						id="description"
+						rows="4"
+						class="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+						placeholder="الوصف"
+					></textarea>
+				</div>
+			</div>
+			<button
+				class="text-white bg-blue-700 m-auto flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+			>
+				<p>اضافة تصنيف</p>
+			</button>
+		</form>
+	</Modal>
+
+	<div>
+		<h1 class="text-center text-4xl p-5 mb-5 font-bold">ادارة الوجبات</h1>
+		<div class="flex justify-between items-center flex-wrap mb-5">
+			<form class="sm:w-[60%] w-full sm:m-0 mb-4" @submit.prevent="">
 				<label
 					for="default-search"
 					class="mb-2 text-lg font-medium text-gray-900 sr-only dark:text-white"
@@ -313,8 +305,7 @@
 			</form>
 			<button
 				type="button"
-				data-modal-target="add-meals"
-				data-modal-toggle="add-meals"
+				@click="openModel"
 				class="text-white bg-blue-700 flex items-center hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
 			>
 				اضافة وجبات
@@ -344,7 +335,7 @@
 
 <script setup>
 definePageMeta({
-	layout: "dashboard"
+	layout: "dashboard",
 });
 // data form
 const name = ref(null);
@@ -378,6 +369,11 @@ const selectcategory = ref(null);
 // 	var files = e.target.files || e.dataTransfer.files;
 // 	console.log(files);
 // }
+
+function openModel() {
+	document.querySelector("#add-meals").showModal();
+}
+
 function get_categories() {
 	useFetch("/api/category").then((response) => {
 		selectcategory.value = response.data.value;
@@ -420,7 +416,7 @@ async function create_meal(e) {
 			"https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload",
 			{
 				method: "post",
-				body: formdataimage
+				body: formdataimage,
 			}
 		).then((response) => {
 			image.value = response.data.value.secure_url;
@@ -436,8 +432,8 @@ async function create_meal(e) {
 			price: price.value,
 			desc: desc.value,
 			image: image.value,
-			category: category.value
-		}
+			category: category.value,
+		},
 	}).then((response) => {
 		if (response.status.value == "success") {
 			alertColor.value = "green";
@@ -461,13 +457,10 @@ async function update_meal(e) {
 	formdataimage.append("file", e.target[1].files[0]);
 	formdataimage.append("upload_preset", "delivery");
 
-	await useFetch(
-		"https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload",
-		{
-			method: "post",
-			body: formdataimage
-		}
-	).then((response) => {
+	await useFetch("https://api-ap.cloudinary.com/v1_1/dnru0whph/image/upload", {
+		method: "post",
+		body: formdataimage,
+	}).then((response) => {
 		if (response.status.value !== "error") {
 			imageupdate.value = response.data.value.secure_url;
 		}
@@ -486,8 +479,8 @@ async function update_meal(e) {
 				price: priceupdate.value,
 				desc: descupdate.value,
 				image: imageupdate.value,
-				category: categoryupdate.value
-			}
+				category: categoryupdate.value,
+			},
 		}).then((response) => {
 			if (response.status.value == "success") {
 				alertColor.value = "green";
@@ -506,7 +499,7 @@ async function update_meal(e) {
 }
 function delete_meal(id) {
 	useFetch(`/api/meals/${id}`, {
-		method: "delete"
+		method: "delete",
 	}).then((response) => {
 		get_meals();
 	});
@@ -515,8 +508,8 @@ async function search() {
 	await useFetch(`/api/meals/search`, {
 		method: "post",
 		body: {
-			search: searchtext.value
-		}
+			search: searchtext.value,
+		},
 	}).then((response) => {
 		searchResult.value = response.data.value;
 
@@ -528,5 +521,3 @@ onMounted(async () => {
 	get_categories();
 });
 </script>
-
-<style lang="scss" scoped></style>

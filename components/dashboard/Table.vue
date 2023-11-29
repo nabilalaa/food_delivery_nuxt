@@ -1,8 +1,6 @@
 <template>
 	<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-		<table
-			class="w-full text-lg text-gray-500 dark:text-gray-400 text-right"
-		>
+		<table class="w-full text-lg text-gray-500 dark:text-gray-400 text-right">
 			<thead
 				class="text-md text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
 			>
@@ -14,11 +12,7 @@
 								type="checkbox"
 								class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
 							/>
-							<label
-								for="checkbox-all-search"
-								class="sr-only"
-								>checkbox</label
-							>
+							<label for="checkbox-all-search" class="sr-only">checkbox</label>
 						</div>
 					</th>
 
@@ -36,25 +30,13 @@
 					>
 						صورة
 					</th>
-					<th
-						v-if="route.path == '/admin/meals'"
-						scope="col"
-						class="px-6 py-3"
-					>
+					<th v-if="route.path == '/admin/meals'" scope="col" class="px-6 py-3">
 						اسم الوجبة
 					</th>
-					<th
-						v-if="route.path == '/admin/meals'"
-						scope="col"
-						class="px-6 py-3"
-					>
+					<th v-if="route.path == '/admin/meals'" scope="col" class="px-6 py-3">
 						الصورة
 					</th>
-					<th
-						v-if="route.path == '/admin/meals'"
-						scope="col"
-						class="px-6 py-3"
-					>
+					<th v-if="route.path == '/admin/meals'" scope="col" class="px-6 py-3">
 						السعر
 					</th>
 					<th
@@ -109,9 +91,7 @@
 								type="checkbox"
 								class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
 							/>
-							<label
-								for="checkbox-table-search-1"
-								class="sr-only"
+							<label for="checkbox-table-search-1" class="sr-only"
 								>checkbox</label
 							>
 						</div>
@@ -159,10 +139,7 @@
 							alt=""
 						/>
 					</th>
-					<td
-						v-if="route.path == '/admin/categories'"
-						class="px-6 py-4"
-					>
+					<td v-if="route.path == '/admin/categories'" class="px-6 py-4">
 						<div class="flex">
 							<button
 								@click="get_id(item.id)"
@@ -184,10 +161,7 @@
 							>
 						</div>
 					</td>
-					<td
-						v-if="route.path == '/admin/meals'"
-						class="px-6 py-4"
-					>
+					<td v-if="route.path == '/admin/meals'" class="px-6 py-4">
 						<div class="flex">
 							<a
 								href="#"
@@ -207,10 +181,7 @@
 							>
 						</div>
 					</td>
-					<td
-						v-if="route.path == '/admin/orders'"
-						class="px-6 py-4"
-					>
+					<td v-if="route.path == '/admin/orders'" class="px-6 py-4">
 						<div class="flex">
 							<a
 								href="#"
@@ -230,10 +201,7 @@
 							>
 						</div>
 					</td>
-					<td
-						v-if="route.path == '/admin/admins'"
-						class="px-6 py-4"
-					>
+					<td v-if="route.path == '/admin/admins'" class="px-6 py-4">
 						<div class="flex">
 							<a
 								href="#"
@@ -266,9 +234,7 @@
 								type="checkbox"
 								class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
 							/>
-							<label
-								for="checkbox-table-search-1"
-								class="sr-only"
+							<label for="checkbox-table-search-1" class="sr-only"
 								>checkbox</label
 							>
 						</div>
@@ -316,16 +282,12 @@
 							alt=""
 						/>
 					</th>
-					<td
-						v-if="route.path == '/admin/categories'"
-						class="px-6 py-4"
-					>
+					<td v-if="route.path == '/admin/categories'" class="px-6 py-4">
 						<div class="flex">
 							<button
-								@click="get_id(item.id)"
+								id="update-category"
+								@click="openModel(), get_id(item.id)"
 								href="#"
-								data-modal-target="update-category"
-								data-modal-toggle="update-category"
 								class="ml-4 block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
 								type="button"
 							>
@@ -341,16 +303,11 @@
 							>
 						</div>
 					</td>
-					<td
-						v-if="route.path == '/admin/meals'"
-						class="px-6 py-4"
-					>
+					<td v-if="route.path == '/admin/meals'" class="px-6 py-4">
 						<div class="flex">
 							<a
+								@click="openModel(), get_id(item.id)"
 								href="#"
-								@click="get_id(item.id)"
-								data-modal-target="update-meals"
-								data-modal-toggle="update-meals"
 								class="ml-4 block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
 								type="button"
 								>تعديل</a
@@ -364,16 +321,11 @@
 							>
 						</div>
 					</td>
-					<td
-						v-if="route.path == '/admin/orders'"
-						class="px-6 py-4"
-					>
+					<td v-if="route.path == '/admin/orders'" class="px-6 py-4">
 						<div class="flex">
 							<a
 								href="#"
-								@click="get_id(item.id)"
-								data-modal-target="update-orders"
-								data-modal-toggle="update-orders"
+								@click="get_id(item.id), openModel()"
 								class="ml-4 block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
 								type="button"
 								>تعديل</a
@@ -387,15 +339,11 @@
 							>
 						</div>
 					</td>
-					<td
-						v-if="route.path == '/admin/admins'"
-						class="px-6 py-4"
-					>
+					<td v-if="route.path == '/admin/admins'" class="px-6 py-4">
 						<div class="flex">
 							<a
 								href="#"
-								data-modal-target="update-admins"
-								data-modal-toggle="update-admins"
+								@click="openModel"
 								class="ml-4 block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
 								type="button"
 								>تعديل</a
@@ -415,16 +363,11 @@
 			class="flex items-center justify-between p-4"
 			aria-label="Table navigation"
 		>
-			<span
-				class="text-lg font-normal text-gray-500 dark:text-gray-400"
+			<span class="text-lg font-normal text-gray-500 dark:text-gray-400"
 				>Showing
-				<span
-					class="font-semibold text-gray-900 dark:text-white"
-					>1-10</span
-				>
+				<span class="font-semibold text-gray-900 dark:text-white">1-10</span>
 				of
-				<span
-					class="font-semibold text-gray-900 dark:text-white"
+				<span class="font-semibold text-gray-900 dark:text-white"
 					>1000</span
 				></span
 			>
@@ -485,6 +428,13 @@
 </template>
 
 <script setup>
+function openModel(e) {
+	document.querySelector("#update").showModal();
+
+	// if (e.target.id == "update-category") {
+	// 	document.querySelector("#update-category").showModal();
+	// }
+}
 const emit = defineEmits(["get_item"]);
 
 function get_id(item) {

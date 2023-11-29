@@ -1,7 +1,6 @@
 <template>
 	<Modal
-		v-show="showmeal"
-		TargetName="info-meals"
+		TargetName="show-meal"
 		Title="معلومات الوجبة"
 		bg="mainColor"
 		width="max-w-2xl"
@@ -9,11 +8,7 @@
 		<h3 class="font-bold text-2xl mt-10">
 			{{ getmeal ? getmeal.name : "" }}
 		</h3>
-		<img
-			class="m-auto my-6"
-			:src="getmeal ? getmeal.image : ''"
-			alt=""
-		/>
+		<img class="m-auto my-6" :src="getmeal ? getmeal.image : ''" alt="" />
 		<div class="flex justify-around">
 			<div>{{ getmeal ? getmeal.desc : "" }}</div>
 			<div>{{ getmeal ? getmeal.price : "" }}</div>
@@ -29,10 +24,7 @@
 					class="icon-search absolute block mr-4 z-50"
 				></span>
 
-				<form
-					class="w-full items-center flex"
-					@submit.prevent=""
-				>
+				<form class="w-full items-center flex" @submit.prevent="">
 					<label
 						for="default-search"
 						class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -74,9 +66,7 @@
 					</button>
 				</form>
 			</div>
-			<div
-				class="items w-full rounded-md border overflow-y-scroll h-96"
-			>
+			<div class="items w-full rounded-md border overflow-y-scroll h-96">
 				<div v-if="searchtext == null">
 					<div
 						v-for="meal in meals"
@@ -114,9 +104,7 @@
 										stroke-linejoin="round"
 										stroke-width="2"
 									>
-										<path
-											d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-										/>
+										<path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
 										<path
 											d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z"
 										/>
@@ -134,11 +122,7 @@
 					>
 						<div class="info flex">
 							<div class="ml-4">
-								{{
-									meal.name
-										? meal.name
-										: "not find"
-								}}
+								{{ meal.name ? meal.name : "not find" }}
 							</div>
 							<div>{{ meal.price }} ج.م</div>
 						</div>
@@ -149,7 +133,7 @@
 								اضافة
 							</button>
 							<button
-								@click="getMeal(meal.id)"
+								@click="getMeal(meal.id), openModal()"
 								data-modal-target="info-meals"
 								data-modal-toggle="info-meals"
 								class="text-white bg-mainColor px-6 py-4 rounded-lg hover:bg-thirdColor transition mr-4"
@@ -167,9 +151,7 @@
 										stroke-linejoin="round"
 										stroke-width="2"
 									>
-										<path
-											d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
-										/>
+										<path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
 										<path
 											d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z"
 										/>
@@ -196,9 +178,10 @@ onMounted(async () => {
 		meals.value = response;
 	});
 });
+function openModal() {}
 
 async function getMeal(id) {
-	showmeal.value = true;
+	document.querySelector("#show-meal").showModal();
 	await $fetch(`/api/meals/${id}`).then((response) => {
 		getmeal.value = response;
 		console.log(response);
@@ -209,8 +192,8 @@ async function search() {
 	await $fetch(`/api/meals/search`, {
 		method: "post",
 		body: {
-			search: searchtext.value
-		}
+			search: searchtext.value,
+		},
 	}).then((response) => {
 		searchResult.value = response;
 
