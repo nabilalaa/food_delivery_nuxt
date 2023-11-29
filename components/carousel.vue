@@ -13,12 +13,15 @@
 					class="overlay z-50 absolute w-full h-full bg-mainColor bg-opacity-50"
 				>
 					<div
-						class="text-white text-xl md:text-2xl w-full p-8 text-left left-[5%] absolute top-1/2 -translate-y-1/2"
+						class="text-white text-center text-xl md:text-2xl w-full p-8 lg:text-left lg:left-[5%] absolute top-1/2 -translate-y-1/2"
 					>
-						<h1>hello</h1>
+						<h1
+							class="text-5xl font-bold bg-gradient-to-br from-mainColor to-thirdColor hover:bg-gradient-to-bl inline-block text-transparent bg-clip-text"
+						>
+							اختر وجبتك
+						</h1>
 						<p class="my-8">
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo,
-							ipsam?
+							اختر وجبتك المفضلة من اكثر من ١٢٠ ألف وجبة في مطاعم مصر
 						</p>
 						<NuxtLink
 							to="addorder"
@@ -41,12 +44,15 @@
 					class="overlay z-50 relative w-full h-full bg-mainColor bg-opacity-50"
 				>
 					<div
-						class="text-white text-xl md:text-2xl w-full p-8 right-[5%] absolute top-1/2 -translate-y-1/2"
+						class="text-white text-center text-xl md:text-2xl w-full p-8 lg:text-right lg:right-[5%] absolute top-1/2 -translate-y-1/2"
 					>
-						<h1>hello</h1>
+						<h1
+							class="text-5xl font-bold bg-gradient-to-br from-mainColor to-thirdColor hover:bg-gradient-to-bl inline-block text-transparent bg-clip-text"
+						>
+							اختر وجبتك
+						</h1>
 						<p class="my-8">
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo,
-							ipsam?
+							اختر وجبتك المفضلة من اكثر من ١٢٠ ألف وجبة في مطاعم مصر
 						</p>
 						<NuxtLink
 							to="addorder"
@@ -68,11 +74,16 @@
 				<div
 					class="overlay z-50 absolute w-full h-full bg-mainColor bg-opacity-50"
 				>
-					<div class="text-white text-2xl absolute left-5 top-1/2">
-						<h1>hello</h1>
+					<div
+						class="text-white text-center text-xl md:text-2xl w-full p-8 absolute top-1/2 -translate-y-1/2"
+					>
+						<h1
+							class="text-5xl font-bold bg-gradient-to-br from-mainColor to-thirdColor hover:bg-gradient-to-bl inline-block text-transparent bg-clip-text"
+						>
+							اختر وجبتك
+						</h1>
 						<p class="my-8">
-							Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo,
-							ipsam?
+							اختر وجبتك المفضلة من اكثر من ١٢٠ ألف وجبة في مطاعم مصر
 						</p>
 						<NuxtLink
 							to="addorder"
@@ -84,21 +95,35 @@
 					</div>
 				</div>
 			</div>
-			<!-- Item 4 -->
 			<div class="hidden duration-700 ease-in-out" data-carousel-item>
 				<img
-					src="https://images.unsplash.com/photo-1691228334686-be5d1eab7d34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=876&q=80"
-					class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+					src="https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=900&t=st=1692179297~exp=1692179897~hmac=8daa2bb6823e69ede46a3373917da2d64874511fe77d8aea219c09be2e5c0cac"
+					class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
 					alt="..."
 				/>
-			</div>
-			<!-- Item 5 -->
-			<div class="hidden duration-700 ease-in-out" data-carousel-item>
-				<img
-					src="https://images.unsplash.com/photo-1691228334686-be5d1eab7d34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=876&q=80"
-					class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-					alt="..."
-				/>
+				<div
+					class="overlay z-50 absolute w-full h-full bg-mainColor bg-opacity-50"
+				>
+					<div
+						class="text-white text-center text-xl md:text-2xl w-full p-8 absolute top-1/2 -translate-y-1/2"
+					>
+						<h1
+							class="text-5xl font-bold bg-gradient-to-br from-mainColor to-thirdColor hover:bg-gradient-to-bl inline-block text-transparent bg-clip-text"
+						>
+							اختر وجبتك
+						</h1>
+						<p class="my-8">
+							اختر وجبتك المفضلة من اكثر من ١٢٠ ألف وجبة في مطاعم مصر
+						</p>
+						<NuxtLink
+							to="addorder"
+							type="button"
+							class="text-white bg-gradient-to-br from-mainColor to-thirdColor hover:bg-gradient-to-bl focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg px-5 py-2.5 text-center hover:duration-1000 capitalize text-xl"
+						>
+							اطلب الأن
+						</NuxtLink>
+					</div>
+				</div>
 			</div>
 		</div>
 		<!-- Slider indicators -->
@@ -132,13 +157,6 @@
 				aria-current="false"
 				aria-label="Slide 4"
 				data-carousel-slide-to="3"
-			></button>
-			<button
-				type="button"
-				class="w-3 h-3 rounded-full"
-				aria-current="false"
-				aria-label="Slide 5"
-				data-carousel-slide-to="4"
 			></button>
 		</div>
 		<button
