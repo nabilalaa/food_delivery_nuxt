@@ -19,3 +19,7 @@ model Meals {
     image    String
     category String
 }
+
+generator client {
+    provider = "prisma-client-js"
+}
